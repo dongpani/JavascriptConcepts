@@ -63,3 +63,34 @@ otherObject.sayName();  // bar
 ```
 
 - 객체 안에 선언된 함수(메서드)의 this 는 자신이 속한 객체를 의미한다.
+
+
+## 함수에서의 this 바인딩
+
+
+```
+var myObject = {
+	value: 0,
+	func1: function() {	
+		that = this;
+		this.value += 1;
+		console.log('func1() called. this.value : ' + this.value);   // 1
+		
+		func2 = function() {
+			that.value += 1;
+			console.log('func2() called. this.value : ' + that.value);   // 2
+			
+			func3 = function() {
+				that.value += 1;
+				console.log('func3() called. this.value : ' + that.value);  // 3
+			}
+			func3();
+		}
+		
+		func2();
+	}
+};
+
+myObject.func1();
+```
+
