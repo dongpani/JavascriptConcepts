@@ -65,14 +65,45 @@ otherObject.sayName();  // bar
 - 객체 안에 선언된 함수(메서드)의 this 는 자신이 속한 객체를 의미한다.
 
 
-## 함수에서의 this 바인딩
-
+## 함수에서의 this 바인딩1
 
 ```
+var value = 100;
+
 var myObject = {
 	value: 0,
 	func1: function() {	
-		that = this;
+		this.value += 1;
+		console.log('func1() called. this.value : ' + this.value);   // 1
+		
+		func2 = function() {
+			this.value += 1;
+			console.log('func2() called. this.value : ' + this.value);   // 101
+			
+			func3 = function() {
+				this.value += 1;
+				console.log('func3() called. this.value : ' + this.value);  // 102
+			}
+			func3();
+		}
+		
+		func2();
+	}
+};
+
+myObject.func1();
+```
+
+## 함수에서의 this 바인딩2
+
+
+```
+var value = 100;
+
+var myObject = {
+	value: 0,
+	func1: function() {	
+		var that = this;
 		this.value += 1;
 		console.log('func1() called. this.value : ' + this.value);   // 1
 		
@@ -94,3 +125,7 @@ var myObject = {
 myObject.func1();
 ```
 
+- 함수내부에서의 this 는 전역객체로 바인딩 된다. 브라우저에서는 window 객체
+- inner 함수도 예외는 없음.
+- 함수호출 시 비밀리에 인자로 arguments 와 this 를 전달한다.
+- 함수 내부에서 this 가 전역객체로 바인딩 되는 것을 막기 위해, this 를 임의적으로 that으로 선언한 후 해당 객체의 프로퍼티만 참조하도록 한다.
