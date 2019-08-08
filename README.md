@@ -64,6 +64,7 @@ otherObject.sayName();  // bar
 
 - 객체 안에 선언된 함수(메서드)의 this 는 자신이 속한 객체를 의미한다.
 
+<br>
 
 ## 함수에서의 this 바인딩1
 
@@ -93,6 +94,8 @@ var myObject = {
 
 myObject.func1();
 ```
+
+<br>
 
 ## 함수에서의 this 바인딩2
 
