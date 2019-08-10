@@ -132,3 +132,69 @@ myObject.func1();
 - inner 함수도 예외는 없음.
 - 함수호출 시 비밀리에 인자로 arguments 와 this 를 전달한다.
 - 함수 내부에서 this 가 전역객체로 바인딩 되는 것을 막기 위해, this 를 임의적으로 that으로 선언한 후 해당 객체의 프로퍼티만 참조하도록 한다.
+
+
+
+## 일반함수에서의 리턴값
+
+```
+var noReturnFunc = function() {
+	console.log('This function has no return statement.');
+};
+
+var result = noReturnFunc();
+console.log(result);
+```
+
+[결과]
+This function has no return statement.
+undefined
+
+- 일반함수에서 return 값을 지정하지 않으면 undefined 가 출력된다.
+
+<br>
+
+
+## 생성자 함수에서의 리턴값 - 객체의 프로퍼티를 리턴값으로 변경.
+
+```
+function Person(name, age, gender) {
+	this.name = name;
+	this.age = age;
+	this.gender = gender;
+
+	return {name:'bar', age:20, gender:'woman'};
+};
+
+var foo = new Person('foo', 30, 'man');
+console.dir(foo);
+```
+
+[결과]
+Object {name: "bar", age: 20, gender: "woman"}
+
+- 생성자함수는 보통 return 값을 지정하지 않는다.
+- 생성자의 객체를 리턴한다.
+
+
+<br>
+
+## 생성자 함수에서의 리턴값 - 기본타입리턴
+
+```
+function Person(name, age, gender) {
+	this.name = name;
+	this.age = age;
+	this.gender = gender;
+
+	return 100;
+}
+
+var foo = new Person('foo', 30, 'man');
+console.log(foo);
+```
+
+[결과]
+Person {name: "foo", age: 30, gender: "man"}
+
+- 생성자함수에 기턴을 기본(숫자)형으로 지정하였지만, 객체를 리턴하므로 반환하지 않는다.
